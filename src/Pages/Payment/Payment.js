@@ -37,21 +37,21 @@ const Payment = () => {
     try {
       const response = await axiosInstance.post(`/payment/create?total=${total * 100}`);
       const clientSecret = response.data?.clientSecret;
-
+        console.log(clientSecret)
       const { paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
       });
-
+          console.log(paymentIntent);
       await db.collection("users")
         .doc(user.uid)
         .collection("orders")
-        .doc(paymentIntent.id)
+        .doc(paymentIntent?.id)
         .set({
           basket: basket,
-          amount: paymentIntent.amount,
-          created: paymentIntent.created,
+          amount: paymentIntent?.amount,
+          created: paymentIntent?.created,
         });
 
       dispatch({ type: Type.EMPTY_BASKET });
