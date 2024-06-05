@@ -1,5 +1,5 @@
 import "./App.css";
-import Routering from "./Routering";
+import Routering from "./Routers";
 import { DataContext } from "./Component/DataProvider/DataProvider";
 import { Type } from "./Utility/action.type";
 import { auth } from "./Utility/firebase";
